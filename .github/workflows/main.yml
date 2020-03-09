@@ -7,7 +7,7 @@ name: CI
 on:
   push:
     branches: [ master ]
-    paths: "Source/*"
+    #paths: "Source/*"
   #pull_request:
   #  branches: [ master ]
     
@@ -37,7 +37,7 @@ jobs:
         echo "actor: ${{ github.actor }}"
         
       env:
-        login: ${{ github.actor }}
+        LOGIN: ${{ github.actor }}
         #echo "login: ${{ github.event.comment.user.login }}"
         #echo "id: ${{ github.event.comment.user.id }}"      
         #emailteste = ${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com
@@ -73,7 +73,12 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Commit files
-      run: git commit -a -m 'Automated dotnet-format update
+      run: |
+        echo "printing env : $LOGIN"
+        
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        git config user.name "${{ github.actor }}"
+        git commit -a -m 'Automated dotnet-format update
 
     - name: Push changes
       uses: ad-m/github-push-action@v0.5.0
