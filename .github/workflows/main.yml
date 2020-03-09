@@ -7,6 +7,7 @@ name: CI
 on:
   push:
     branches: [ master ]
+    paths: "Source/*"
   #pull_request:
   #  branches: [ master ]
     
@@ -30,12 +31,17 @@ jobs:
     - name: Run a one-line script
       run: |
         echo "Hello, world! Starting my custom action..."
-        echo "login: ${{ github.event.comment.user.login }}"
-        echo "id: ${{ github.event.comment.user.id }}"      
+        echo "ref: ${{ github.ref }}"
+        echo "head_ref: ${{ github.head_ref }}"
+        echo "base_ref: ${{ github.base_ref }}"
+        echo "actor: ${{ github.actor }}"
         
-        emailteste = ${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com
-        
-        echo "email: $emailteste"
+      env:
+        login: ${{ github.actor }}
+        #echo "login: ${{ github.event.comment.user.login }}"
+        #echo "id: ${{ github.event.comment.user.id }}"      
+        #emailteste = ${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com
+        #echo "email: $emailteste"
 
     - name: Checkout repo
       if: success()
@@ -63,15 +69,11 @@ jobs:
       with:
         # The GITHUB_TOKEN secret
         repo-token: ${{ secrets.MY_SECRET }} # repo-token: ${{ secrets.GITHUB_TOKEN }}
+        #only-changed-files: true
 
     # Runs a set of commands using the runners shell
     - name: Commit files
-      run: |
-        email = ${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com
-        git config --local user.name "github.event.comment.user.login"
-        git config --local user.email "$email"
-        git commit -a -m 'Automated dotnet-format update
-        Co-authored-by: ${{ github.event.comment.user.login }} <${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com>'
+      run: git commit -a -m 'Automated dotnet-format update
 
     - name: Push changes
       uses: ad-m/github-push-action@v0.5.0
