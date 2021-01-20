@@ -1,27 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\Maverick.TmdbAdapter.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\Maverick.TmdbAdapter.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Maverick.TmdbAdapter.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\Maverick.TmdbAdapter.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="Refit" Version="5.0.23" />
-    <PackageReference Include="Otc.Caching.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Otc.Networking.Http.Client.Abstractions" Version="1.0.1" />
+    <PackageReference Include="AutoMapper" Version="10.1.0" />
+    <PackageReference Include="Otc.Caching.Abstractions" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\otc-networking\Source\Otc.Networking.Extensions.Http.Refit\Otc.Networking.Extensions.Http.Refit.csproj" />
     <ProjectReference Include="..\Maverick.Domain\Maverick.Domain.csproj" />
   </ItemGroup>
 

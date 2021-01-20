@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.1\Maverick.WebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\Maverick.WebApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp2.1\Maverick.WebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\Maverick.WebApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Content Remove="appsettings.json" />
   </ItemGroup>
@@ -21,27 +21,19 @@
   <ItemGroup>
     <None Include="appsettings.json" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Otc.Validations.Helpers" Version="2.1.0" />
-    <PackageReference Include="Otc.AspNetCore.ApiBoot" Version="3.2.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <!-- REMOVER REFERENCIAS  -->
+    <ProjectReference Include="..\..\..\otc-aspnetcore-apiboot\Source\Otc.ApiBoot\Otc.ApiBoot.csproj" />
+    <ProjectReference Include="..\..\..\otc-extensions\Source\Otc.Extensions.Configuration\Otc.Extensions.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\otc-networking\Source\Otc.Networking.Extensions.Http.Refit\Otc.Networking.Extensions.Http.Refit.csproj" />
     <ProjectReference Include="..\Maverick.Application\Maverick.Application.csproj" />
-    <ProjectReference Include="..\Maverick.TmdbAdapter\Maverick.TmdbAdapter.csproj" />
     <ProjectReference Include="..\Maverick.Domain\Maverick.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update=".dockerignore">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Dockerfile">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Maverick.TmdbAdapter\Maverick.TmdbAdapter.csproj" />
   </ItemGroup>
 
 </Project>

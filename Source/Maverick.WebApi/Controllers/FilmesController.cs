@@ -7,7 +7,7 @@ using Maverick.Domain.Services;
 using Maverick.WebApi.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Otc.AspNetCore.ApiBoot;
+using Otc.ApiBoot.Controllers;
 using Otc.DomainBase.Exceptions;
 
 namespace Maverick.WebApi.Controllers

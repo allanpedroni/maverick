@@ -4,7 +4,8 @@ using Maverick.Application;
 using Maverick.TmdbAdapter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Otc.AspNetCore.ApiBoot;
+using Otc.ApiBoot;
+using Otc.ApiBoot.Configuration;
 using Otc.Extensions.Configuration;
 
 namespace Maverick.WebApi
@@ -24,7 +25,7 @@ namespace Maverick.WebApi
         protected override ApiMetadata ApiMetadata => new ApiMetadata()
         {
             Name = "Maverick",
-            Description = "{{webAPIDescription}}",
+            Description = "Maverik descrição API",
             DefaultApiVersion = "1.0"
         };
 

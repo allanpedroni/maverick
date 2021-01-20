@@ -1,7 +1,7 @@
-using Maverick.Application;
-using Maverick.Domain.Services;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Maverick.Application;
+using Maverick.Domain.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

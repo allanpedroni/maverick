@@ -3,8 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using Maverick.Domain.Adapters;
 using Maverick.TmdbAdapter;
 using Maverick.TmdbAdapter.Clients;
-using Otc.Networking.Http.Client.Abstractions;
-using Refit;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -30,16 +28,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Configura os parametros para chamada na TMDb API e registra a
             // interface ITmdbApi.
-            services.AddScoped(serviceProvider =>
-            {
-                var httpClientFactory = serviceProvider
-                    .GetService<IHttpClientFactory>();
-                var httpClient = httpClientFactory.CreateHttpClient();
-                httpClient.BaseAddress =
-                    new Uri(tmdbAdapterConfiguration.TmdbApiUrlBase);
-
-                return RestService.For<ITmdbApi>(httpClient);
-            });
+            services.AddRefitClientWithCorrelation<ITmdbApi>()
+                .ConfigureHttpClient(config =>
+                {
+                    config.BaseAddress = new Uri(tmdbAdapterConfiguration.TmdbApiUrlBase);
+                });
 
             // Registra a implementacao do ITmdbAdapter para ser utilizado na
             // camada de aplicacao.
